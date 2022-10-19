@@ -20,19 +20,57 @@ const Container = styled.div`
 
 function App() {
   const [pageFlow, setPageFlow] = useState(1);
+  //LOGIN
+  const [usuario, setUsuario] = useState('');
+  const [img, setImg] = useState('');
+  
+  const [imgForm, setImgForm] = useState('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAA1BMVEX///+nxBvIAAAASElEQVR4nO3BgQAAAADDoPlTX+AIVQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwDcaiAAFXD1ujAAAAAElFTkSuQmCC')
+  const [nameForm, setNameForm] = useState('')
+  //POSTAGEM
+  const [titulo, setTitulo] = useState('')
+  const [imagem, setImagem] = useState('')
+  const [descricao, setDescricao] = useState('')
+
+  const [tituloTela, setTituloTela] = useState('Um titulo')
+  const [imagemTela, setImagemTela] = useState('https://picsum.photos/536/354')
+  const [descricaoTela, setDescricaoTela] = useState('Uma descricao')
+
+  const button = ()=>{
+    setTituloTela(titulo)
+    setImagemTela(imagem)
+    setDescricaoTela(descricao)
+  }
   return (
     <>
       <GlobalStyle />
       <Container>
         <aside>
-          <Header />
+          <Header usuario={nameForm} img={imgForm}/>
           {pageFlow === 1 ? (
-            <FormularioLogin setPageFlow={setPageFlow} />
+            <FormularioLogin 
+            setPageFlow={setPageFlow} 
+            usuario={usuario} 
+            setUsuario={setUsuario} 
+            img={img}
+            setImg={setImg}
+            setImgForm={setImgForm}
+            setNameForm={setNameForm}/>
           ) : (
-            <FormularioPostagem />
+            <FormularioPostagem 
+            titulo={titulo}
+            setTitulo={setTitulo}
+            imagem={imagem}
+            setImagem={setImagem}
+            descricao={descricao}
+            setDescricao={setDescricao}
+            button={button}
+            />
           )}
         </aside>
-        <TelaDaPostagem />
+        <TelaDaPostagem 
+        titulo={tituloTela} 
+        imagem={imagemTela}
+        descricao={descricaoTela}/>
       </Container>
     </>
   );
